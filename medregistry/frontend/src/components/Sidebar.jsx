@@ -18,33 +18,6 @@ export function Sidebar({ currentTab, onNavigate }) {
   return (
     <aside className="app-sidebar">
       <div>
-        <div className="sidebar-user-card">
-          <div 
-            className="sidebar-avatar-wrapper"
-            onClick={() => onNavigate('profile')}
-            title="View Profile"
-          >
-            <img 
-              src={currentUser.avatar} 
-              alt={currentUser.name} 
-              className="sidebar-avatar" 
-            />
-          </div>
-          <h3 
-            className="sidebar-user-name"
-            onClick={() => onNavigate('profile')}
-          >
-            {currentUser.name}
-          </h3>
-          <p className="sidebar-user-dept">{currentUser.fullTitle}</p>
-          <button 
-            className="btn-verify-credentials"
-            onClick={() => onNavigate('profile')}
-          >
-            Verify Credentials
-          </button>
-        </div>
-
         <nav className="sidebar-menu">
           {mainNavItems.map((item) => {
             const Icon = item.icon;

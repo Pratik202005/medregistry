@@ -154,7 +154,7 @@ export const medicalFeedPosts = [
     },
     time: '5 hrs ago',
     category: 'Student Corner',
-    content: 'Finished my 2-month Clinical Rotations in Emergency Medicine! 🩺 Group study session on Harrison\'s Principles of Internal Medicine scheduled for this weekend.\n\nSeniors and Residents: What are your top tips for tackling case presentations effectively during morning rounds?',
+    content: 'Finished my 2-month Clinical Rotations in Emergency Medicine! Group study session on Harrison\'s Principles of Internal Medicine scheduled for this weekend.\n\nSeniors and Residents: What are your top tips for tackling case presentations effectively during morning rounds?',
     tags: ['#MedicalStudent', '#MBBS', '#EmergencyMedicine', '#MedEd'],
     likes: 89,
     comments: [

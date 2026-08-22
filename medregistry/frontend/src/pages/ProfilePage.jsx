@@ -1,269 +1,234 @@
-import React, { useState } from 'react';
-import { CheckCircle2, MessageSquare, Calendar, GraduationCap, Award, ShieldCheck } from 'lucide-react';
-import { peerProfiles, currentUser } from '../data/mockData';
+import React from 'react';
+import { CheckCircle2, MessageSquare, Calendar, GraduationCap, Award, MapPin, Building2, FileText, Share2, Briefcase, ExternalLink, ShieldCheck } from 'lucide-react';
+import { currentUser } from '../data/mockData';
 
 export function ProfilePage({ onNavigate }) {
-  const [profileView, setProfileView] = useState('anjali-menon'); // default to Dr. Anjali Menon matching Screenshot 3
-
-  const isSelf = profileView === 'self';
-  const profile = isSelf 
-    ? {
-        name: currentUser.name,
-        verified: true,
-        degree: currentUser.degree,
-        regNumber: currentUser.regNumber,
-        specialty: currentUser.specialty,
-        experience: currentUser.experience,
-        location: currentUser.location,
-        avatar: currentUser.avatar,
-        experienceList: [
-          {
-            role: 'Head of Department & DM Specialist',
-            institution: 'AIIMS New Delhi',
-            period: '2016 - Present',
-            duties: [
-              'Leading interventional cardiology team in high-volume catheterization lab.',
-              'Pioneered post-op cardiology care guidelines across regional hospitals.',
-              'Mentoring DM Cardiology fellows and post-graduate residents.'
-            ]
-          },
-          {
-            role: 'Associate Professor',
-            institution: 'PGIMER Chandigarh',
-            period: '2010 - 2016',
-            duties: [
-              'Supervised clinical trials in acute coronary syndrome and stent outcomes.'
-            ]
-          }
-        ],
-        education: [
-          {
-            degree: 'DM Cardiology',
-            institution: 'AIIMS New Delhi',
-            completed: 'Completed 2010'
-          },
-          {
-            degree: 'MD Internal Medicine',
-            institution: 'KEM Hospital, Mumbai',
-            completed: 'Completed 2006'
-          },
-          {
-            title: 'Fellow of American College of Cardiology (FACC)',
-            issuer: 'ACC USA',
-            validity: 'Lifetime'
-          }
+  const profile = {
+    name: currentUser.name,
+    verified: true,
+    degree: currentUser.degree,
+    regNumber: currentUser.regNumber,
+    specialty: currentUser.specialty,
+    experience: currentUser.experience,
+    location: currentUser.location,
+    avatar: currentUser.avatar,
+    institution: currentUser.institution,
+    headline: 'Senior Consultant & HOD Cardiology | DM Specialist | AIIMS Delhi',
+    about: 'Board-certified Cardiologist with over 18 years of clinical experience in interventional cardiology, acute coronary care, and post-operative cardiac guidelines. Passionate about medical education and integrating diagnostic AI in cardiology.',
+    experienceList: [
+      {
+        role: 'Head of Department & Senior Consultant',
+        institution: 'AIIMS New Delhi',
+        period: '2016 - Present',
+        duties: [
+          'Leading interventional cardiology team in high-volume catheterization lab.',
+          'Pioneered post-op cardiology care guidelines across regional hospital networks.',
+          'Supervising DM Cardiology fellows and medical residents.'
+        ]
+      },
+      {
+        role: 'Associate Professor',
+        institution: 'PGIMER Chandigarh',
+        period: '2010 - 2016',
+        duties: [
+          'Led clinical trials in acute coronary syndrome and stent outcomes.'
         ]
       }
-    : peerProfiles['anjali-menon'];
+    ],
+    education: [
+      {
+        degree: 'DM Cardiology',
+        institution: 'AIIMS New Delhi',
+        completed: 'Completed 2010'
+      },
+      {
+        degree: 'MD Internal Medicine',
+        institution: 'KEM Hospital, Mumbai',
+        completed: 'Completed 2006'
+      },
+      {
+        title: 'Fellow of American College of Cardiology (FACC)',
+        issuer: 'ACC USA',
+        validity: 'Lifetime Fellow'
+      }
+    ]
+  };
 
   return (
-    <div style={{ padding: '24px 32px' }}>
-      {/* Profile view switcher pill */}
-      <div style={{ display: 'flex', gap: '10px', marginBottom: '20px' }}>
-        <button 
-          style={{ 
-            padding: '6px 14px', 
-            borderRadius: '20px', 
-            fontSize: '12px', 
-            fontWeight: 700,
-            backgroundColor: profileView === 'anjali-menon' ? '#0e5c63' : '#e1e7e7',
-            color: profileView === 'anjali-menon' ? '#ffffff' : '#5b6b6c'
-          }}
-          onClick={() => setProfileView('anjali-menon')}
-        >
-          View Dr. Anjali Menon (Screenshot 3)
-        </button>
-        <button 
-          style={{ 
-            padding: '6px 14px', 
-            borderRadius: '20px', 
-            fontSize: '12px', 
-            fontWeight: 700,
-            backgroundColor: profileView === 'self' ? '#0e5c63' : '#e1e7e7',
-            color: profileView === 'self' ? '#ffffff' : '#5b6b6c'
-          }}
-          onClick={() => setProfileView('self')}
-        >
-          View My Profile (Dr. Rajesh Sharma)
-        </button>
-      </div>
+    <div style={{ padding: '24px 32px', maxWidth: '1200px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+      
+      {/* Hero LinkedIn Style Profile Card */}
+      <div className="card" style={{ padding: 0, overflow: 'hidden' }}>
+        {/* Cover Image Banner */}
+        <div style={{ height: '140px', background: 'linear-gradient(135deg, #0f766e 0%, #0f172a 100%)' }} />
 
-      <div style={{ display: 'flex', gap: '32px' }}>
-        {/* Left Column: Doctor Profile Card & Contact */}
-        <div style={{ width: '300px', flexShrink: 0, display: 'flex', flexDirection: 'column', gap: '20px' }}>
-          <div className="card" style={{ textAlign: 'center', padding: '24px 20px' }}>
-            <div style={{ position: 'relative', display: 'inline-block', marginBottom: '16px' }}>
+        <div style={{ padding: '0 28px 24px', marginTop: '-50px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap' }}>
+            <div style={{ position: 'relative' }}>
               <img 
                 src={profile.avatar} 
                 alt={profile.name} 
-                style={{ width: '130px', height: '130px', objectFit: 'cover', borderRadius: '4px' }} 
+                style={{ 
+                  width: '116px', 
+                  height: '116px', 
+                  objectFit: 'cover', 
+                  borderRadius: '50%',
+                  border: '4px solid #ffffff',
+                  boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1)'
+                }} 
               />
-              <div style={{ 
-                position: 'absolute', 
-                bottom: '-10px', 
-                left: '50%', 
-                transform: 'translateX(-50%)',
-                backgroundColor: '#0e5c63',
-                color: '#ffffff',
-                fontSize: '10px',
-                fontWeight: 700,
-                padding: '3px 8px',
-                borderRadius: '3px',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '4px',
-                whiteSpace: 'nowrap'
-              }}>
-                <CheckCircle2 size={12} /> VERIFIED
-              </div>
             </div>
 
-            <h2 className="font-serif" style={{ fontSize: '24px', color: '#1c2826', fontWeight: 700, marginTop: '8px' }}>
-              {profile.name}
-            </h2>
-            <p style={{ fontSize: '13px', color: '#5b6b6c', marginBottom: '20px' }}>
-              {profile.degree}
+            <div style={{ display: 'flex', gap: '10px', marginTop: '16px' }}>
+              <button 
+                onClick={() => onNavigate('messages')}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  padding: '8px 18px',
+                  borderRadius: '20px',
+                  backgroundColor: '#0f766e',
+                  color: '#ffffff',
+                  fontSize: '13px',
+                  fontWeight: 600,
+                  border: 'none',
+                  cursor: 'pointer'
+                }}
+              >
+                <MessageSquare size={15} /> Send Message
+              </button>
+
+              <button 
+                onClick={() => alert(`Consultation request sent to ${profile.name}`)}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  padding: '8px 18px',
+                  borderRadius: '20px',
+                  border: '1px solid #0f766e',
+                  color: '#0f766e',
+                  backgroundColor: 'transparent',
+                  fontSize: '13px',
+                  fontWeight: 600,
+                  cursor: 'pointer'
+                }}
+              >
+                <Calendar size={15} /> Request Consult
+              </button>
+            </div>
+          </div>
+
+          <div style={{ marginTop: '16px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <h2 style={{ fontSize: '24px', fontWeight: 700, color: '#0f172a', margin: 0, letterSpacing: '-0.02em' }}>
+                {profile.name}
+              </h2>
+              {profile.verified && (
+                <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', fontSize: '11px', fontWeight: 600, color: '#15803d', backgroundColor: '#dcfce7', padding: '2px 8px', borderRadius: '12px' }}>
+                  <CheckCircle2 size={12} /> Verified Practitioner
+                </span>
+              )}
+            </div>
+
+            <p style={{ fontSize: '14px', fontWeight: 600, color: '#0f766e', marginTop: '4px' }}>
+              {profile.headline}
             </p>
 
-            <div style={{ borderTop: '1px solid #edf1f1', paddingTop: '16px', display: 'flex', flexDirection: 'column', gap: '10px', textAlign: 'left' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px' }}>
-                <span style={{ color: '#88999b', fontWeight: 700 }}>REG. NUMBER</span>
-                <span style={{ color: '#1c2826', fontWeight: 700 }}>{profile.regNumber}</span>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px' }}>
-                <span style={{ color: '#88999b', fontWeight: 700 }}>SPECIALTY</span>
-                <span style={{ color: '#1c2826', fontWeight: 700 }}>{profile.specialty}</span>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px' }}>
-                <span style={{ color: '#88999b', fontWeight: 700 }}>EXPERIENCE</span>
-                <span style={{ color: '#1c2826', fontWeight: 700 }}>{profile.experience}</span>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px' }}>
-                <span style={{ color: '#88999b', fontWeight: 700 }}>LOCATION</span>
-                <span style={{ color: '#1c2826', fontWeight: 700 }}>{profile.location}</span>
-              </div>
+            <div style={{ display: 'flex', gap: '16px', fontSize: '13px', color: '#475569', marginTop: '8px', flexWrap: 'wrap', alignItems: 'center' }}>
+              <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                <Building2 size={14} color="#64748b" /> {profile.institution}
+              </span>
+              <span>•</span>
+              <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                <MapPin size={14} color="#64748b" /> {profile.location}
+              </span>
+              <span>•</span>
+              <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                <ShieldCheck size={14} color="#64748b" /> Reg No: {profile.regNumber}
+              </span>
             </div>
-          </div>
 
-          {/* Contact Actions */}
-          <div className="card">
-            <h4 style={{ fontSize: '14px', fontWeight: 700, color: '#1c2826', marginBottom: '14px' }}>
-              Contact Actions
-            </h4>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-              <button 
-                style={{ 
-                  width: '100%', 
-                  padding: '10px', 
-                  backgroundColor: '#0e5c63', 
-                  color: '#ffffff', 
-                  borderRadius: '4px',
-                  fontSize: '13px',
-                  fontWeight: 700,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '8px'
-                }}
-                onClick={() => onNavigate('messages')}
-              >
-                <MessageSquare size={16} /> Message
-              </button>
-              <button 
-                style={{ 
-                  width: '100%', 
-                  padding: '10px', 
-                  border: '1px solid #0e5c63', 
-                  color: '#0e5c63', 
-                  borderRadius: '4px',
-                  fontSize: '13px',
-                  fontWeight: 700,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '8px'
-                }}
-                onClick={() => alert(`Consultation request sent to ${profile.name}`)}
-              >
-                <Calendar size={16} /> Request Consult
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Right Column: Clinical Experience & Education */}
-        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '28px' }}>
-          {/* Clinical Experience */}
-          <div>
-            <h2 className="font-serif" style={{ fontSize: '26px', color: '#1c2826', fontWeight: 700, marginBottom: '16px' }}>
-              Clinical Experience
-            </h2>
-
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-              {profile.experienceList.map((exp, idx) => (
-                <div key={idx} className="card" style={{ position: 'relative' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px' }}>
-                    <div>
-                      <h3 style={{ fontSize: '17px', fontWeight: 700, color: '#1c2826' }}>
-                        {exp.role}
-                      </h3>
-                      <div style={{ fontSize: '13px', fontWeight: 600, color: '#0e5c63' }}>
-                        {exp.institution}
-                      </div>
-                    </div>
-                    <span style={{ 
-                      fontSize: '11px', 
-                      fontWeight: 700, 
-                      backgroundColor: '#f1f5f5', 
-                      padding: '4px 8px', 
-                      borderRadius: '3px',
-                      color: '#5b6b6c'
-                    }}>
-                      {exp.period}
-                    </span>
-                  </div>
-
-                  <ul style={{ paddingLeft: '18px', marginTop: '10px', fontSize: '13px', color: '#5b6b6c', display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                    {exp.duties.map((duty, dIdx) => (
-                      <li key={dIdx}>{duty}</li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Education & Certifications */}
-          <div>
-            <h2 className="font-serif" style={{ fontSize: '26px', color: '#1c2826', fontWeight: 700, marginBottom: '16px' }}>
-              Education & Certifications
-            </h2>
-
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
-              {profile.education.map((edu, eIdx) => (
-                <div key={eIdx} className="card" style={{ display: 'flex', gap: '14px', alignItems: 'flex-start' }}>
-                  {edu.title ? (
-                    <Award size={24} color="#0e5c63" style={{ flexShrink: 0, marginTop: '2px' }} />
-                  ) : (
-                    <GraduationCap size={24} color="#0e5c63" style={{ flexShrink: 0, marginTop: '2px' }} />
-                  )}
-                  <div>
-                    <h4 style={{ fontSize: '15px', fontWeight: 700, color: '#1c2826', marginBottom: '2px' }}>
-                      {edu.degree || edu.title}
-                    </h4>
-                    <div style={{ fontSize: '12px', color: '#5b6b6c', marginBottom: '4px' }}>
-                      {edu.institution || edu.issuer}
-                    </div>
-                    <div style={{ fontSize: '11px', color: '#88999b', fontWeight: 600 }}>
-                      {edu.completed || edu.validity}
-                    </div>
-                  </div>
-                </div>
-              ))}
+            <div style={{ borderTop: '1px solid #f1f5f9', marginTop: '16px', paddingTop: '12px', display: 'flex', gap: '24px', fontSize: '13px' }}>
+              <span style={{ color: '#475569' }}><strong style={{ color: '#0f766e' }}>1,280</strong> Connections</span>
+              <span style={{ color: '#475569' }}><strong style={{ color: '#0f766e' }}>342</strong> Profile Views</span>
+              <span style={{ color: '#475569' }}><strong style={{ color: '#0f766e' }}>24</strong> Clinical Cases</span>
             </div>
           </div>
         </div>
       </div>
+
+      {/* About Section */}
+      <div className="card" style={{ padding: '20px 24px' }}>
+        <h3 style={{ fontSize: '17px', fontWeight: 700, color: '#0f172a', marginBottom: '10px' }}>
+          About
+        </h3>
+        <p style={{ fontSize: '14px', color: '#334155', lineHeight: 1.6, margin: 0 }}>
+          {profile.about}
+        </p>
+      </div>
+
+      {/* Clinical Experience */}
+      <div className="card" style={{ padding: '20px 24px' }}>
+        <h3 style={{ fontSize: '17px', fontWeight: 700, color: '#0f172a', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <Briefcase size={18} color="#0f766e" /> Clinical Experience
+        </h3>
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+          {profile.experienceList.map((exp, idx) => (
+            <div key={idx} style={{ display: 'flex', gap: '16px', alignItems: 'flex-start' }}>
+              <div style={{ padding: '10px', backgroundColor: '#ccfbf1', borderRadius: '8px', color: '#0f766e' }}>
+                <Building2 size={22} />
+              </div>
+              <div style={{ flex: 1 }}>
+                <h4 style={{ fontSize: '15px', fontWeight: 700, color: '#0f172a', margin: 0 }}>
+                  {exp.role}
+                </h4>
+                <div style={{ fontSize: '13px', fontWeight: 600, color: '#0f766e', marginTop: '2px' }}>
+                  {exp.institution}
+                </div>
+                <div style={{ fontSize: '12px', color: '#64748b', marginTop: '2px' }}>
+                  {exp.period}
+                </div>
+
+                <ul style={{ paddingLeft: '18px', marginTop: '8px', fontSize: '13px', color: '#475569', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                  {exp.duties.map((duty, dIdx) => (
+                    <li key={dIdx}>{duty}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Education & Licensing */}
+      <div className="card" style={{ padding: '20px 24px' }}>
+        <h3 style={{ fontSize: '17px', fontWeight: 700, color: '#0f172a', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <GraduationCap size={18} color="#0f766e" /> Education & Medical Licensing
+        </h3>
+
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+          {profile.education.map((edu, eIdx) => (
+            <div key={eIdx} style={{ display: 'flex', gap: '12px', padding: '14px', backgroundColor: '#f8fafc', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
+              <Award size={22} color="#0f766e" style={{ flexShrink: 0, marginTop: '2px' }} />
+              <div>
+                <h4 style={{ fontSize: '14px', fontWeight: 700, color: '#0f172a', margin: 0 }}>
+                  {edu.degree || edu.title}
+                </h4>
+                <div style={{ fontSize: '12px', color: '#475569', marginTop: '2px' }}>
+                  {edu.institution || edu.issuer}
+                </div>
+                <div style={{ fontSize: '11px', color: '#64748b', fontWeight: 500, marginTop: '4px' }}>
+                  {edu.completed || edu.validity}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
     </div>
   );
 }

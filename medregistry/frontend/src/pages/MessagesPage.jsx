@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, Paperclip, Send, Lock, CheckCheck, CheckCircle2 } from 'lucide-react';
+import { Search, Paperclip, Send, Lock, CheckCheck, CheckCircle2, FileText, Image, MoreVertical } from 'lucide-react';
 import { chatConversations, peerProfiles, currentUser } from '../data/mockData';
 
 export function MessagesPage({ onNavigate }) {
@@ -9,7 +9,6 @@ export function MessagesPage({ onNavigate }) {
   const [inputMessage, setInputMessage] = useState('');
 
   const activeConv = conversations.find((c) => c.id === activeConvId) || conversations[0];
-  const peerInfo = peerProfiles['sameer-desai'];
 
   const filteredConversations = conversations.filter(c => 
     c.name.toLowerCase().includes(filterText.toLowerCase()) || 
@@ -44,17 +43,32 @@ export function MessagesPage({ onNavigate }) {
   };
 
   return (
-    <div style={{ display: 'flex', height: 'calc(100vh - 64px)', overflow: 'hidden' }}>
+    <div style={{ display: 'flex', height: 'calc(100vh - 64px)', overflow: 'hidden', maxWidth: '1400px', margin: '0 auto', borderLeft: '1px solid #e1e7e7', borderRight: '1px solid #e1e7e7' }}>
+      
       {/* 1. Left Conversation List */}
-      <div style={{ width: '320px', borderRight: '1px solid #e1e7e7', backgroundColor: '#ffffff', display: 'flex', flexDirection: 'column' }}>
-        <div style={{ padding: '16px', borderBottom: '1px solid #edf1f1' }}>
-          <div className="header-search" style={{ width: '100%' }}>
-            <Search size={16} color="#88999b" />
+      <div style={{ width: '360px', borderRight: '1px solid #e1e7e7', backgroundColor: '#ffffff', display: 'flex', flexDirection: 'column' }}>
+        <div style={{ padding: '16px', borderBottom: '1px solid #edf1f1', backgroundColor: '#fafcfc' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+            <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#1c2826', margin: 0 }}>
+              Medical Consults & Messages
+            </h3>
+          </div>
+
+          <div style={{ position: 'relative' }}>
+            <Search size={16} color="#88999b" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)' }} />
             <input 
               type="text" 
-              placeholder="Filter conversations..."
+              placeholder="Search conversations by doctor or specialty..."
               value={filterText}
               onChange={(e) => setFilterText(e.target.value)}
+              style={{
+                width: '100%',
+                padding: '8px 12px 8px 36px',
+                borderRadius: '20px',
+                border: '1px solid #c8d5d6',
+                fontSize: '13px',
+                outline: 'none'
+              }}
             />
           </div>
         </div>
@@ -69,28 +83,32 @@ export function MessagesPage({ onNavigate }) {
                   padding: '16px', 
                   borderBottom: '1px solid #edf1f1', 
                   cursor: 'pointer',
-                  backgroundColor: isSelected ? '#f1f5f5' : 'transparent',
+                  backgroundColor: isSelected ? '#e2f4eb' : 'transparent',
                   transition: 'background-color 0.15s ease'
                 }}
                 onClick={() => setActiveConvId(conv.id)}
               >
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
-                  <h4 style={{ fontSize: '15px', fontWeight: 700, color: '#1c2826' }}>
-                    {conv.name}
-                  </h4>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '4px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <h4 style={{ fontSize: '14px', fontWeight: 700, color: '#1c2826', margin: 0 }}>
+                      {conv.name}
+                    </h4>
+                    <CheckCircle2 size={14} color="#0e5c63" style={{ fill: '#e2f4eb' }} title="Verified" />
+                  </div>
                   <span style={{ fontSize: '11px', color: '#88999b' }}>
                     {conv.time}
                   </span>
                 </div>
-                <div style={{ fontSize: '11px', fontWeight: 600, color: '#5b6b6c', marginBottom: '6px' }}>
+                <div style={{ fontSize: '11px', fontWeight: 600, color: '#0e5c63', marginBottom: '4px' }}>
                   {conv.dept}
                 </div>
                 <p style={{ 
                   fontSize: '12px', 
-                  color: '#88999b', 
+                  color: '#5b6b6c', 
                   whiteSpace: 'nowrap', 
                   overflow: 'hidden', 
-                  textOverflow: 'ellipsis' 
+                  textOverflow: 'ellipsis',
+                  margin: 0 
                 }}>
                   {conv.preview}
                 </p>
@@ -100,152 +118,108 @@ export function MessagesPage({ onNavigate }) {
         </div>
       </div>
 
-      {/* 2. Middle Main Chat Area */}
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', backgroundColor: '#f4f6f6' }}>
-        {/* Chat Header */}
-        <div style={{ 
-          height: '60px', 
-          backgroundColor: '#ffffff', 
-          borderBottom: '1px solid #e1e7e7', 
-          display: 'flex', 
-          alignItems: 'center', 
-          justifyContent: 'space-between', 
-          padding: '0 20px' 
-        }}>
-          <div>
-            <h3 style={{ fontSize: '17px', fontWeight: 700, color: '#1c2826', display: 'flex', alignItems: 'center', gap: '8px' }}>
-              {activeConv.name}
-            </h3>
-            <div style={{ fontSize: '11px', color: '#0d7348', display: 'flex', alignItems: 'center', gap: '4px', fontWeight: 600 }}>
-              <CheckCircle2 size={12} /> Verified Practitioner
+      {/* 2. Middle Active Chat Canvas */}
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', backgroundColor: '#ffffff' }}>
+        {/* Chat Top Banner */}
+        <div style={{ padding: '16px 24px', borderBottom: '1px solid #edf1f1', display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#fafcfc' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div style={{ position: 'relative' }}>
+              <div style={{ width: '42px', height: '42px', borderRadius: '50%', backgroundColor: '#0e5c63', color: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: '16px' }}>
+                {activeConv.name.charAt(4) || 'D'}
+              </div>
+              <span style={{ position: 'absolute', bottom: 0, right: 0, width: '10px', height: '10px', borderRadius: '50%', backgroundColor: '#0d7348', border: '2px solid #ffffff' }} title="Active Now" />
+            </div>
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <h3 style={{ fontSize: '16px', fontWeight: 700, color: '#1c2826', margin: 0 }}>
+                  {activeConv.name}
+                </h3>
+                <CheckCircle2 size={16} color="#0e5c63" style={{ fill: '#e2f4eb' }} />
+              </div>
+              <div style={{ fontSize: '12px', color: '#5b6b6c' }}>
+                {activeConv.dept} • <span style={{ color: '#0d7348', fontWeight: 600 }}>Active Medical Registry Channel</span>
+              </div>
             </div>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <button className="icon-btn" title="Attach Document" onClick={() => alert("Upload file preview...")}>
-              <Paperclip size={18} />
+          <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+            <button 
+              onClick={() => onNavigate('profile')}
+              style={{ fontSize: '12px', fontWeight: 700, color: '#0e5c63', padding: '6px 14px', borderRadius: '16px', border: '1px solid #0e5c63', background: 'none', cursor: 'pointer' }}
+            >
+              View Doctor Profile
             </button>
           </div>
         </div>
 
-        {/* Messages Body */}
+        {/* Encrypted Disclaimer */}
+        <div style={{ backgroundColor: '#f6f8f8', padding: '8px 16px', textAlign: 'center', fontSize: '11px', color: '#5b6b6c', borderBottom: '1px solid #edf1f1', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
+          <Lock size={12} color="#0e5c63" /> Verified End-to-End Encrypted Channel for Clinical Consultations & Case Sharing
+        </div>
+
+        {/* Message Stream */}
         <div style={{ flex: 1, padding: '20px 24px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '16px' }}>
-          <div style={{ textAlign: 'center', margin: '8px 0' }}>
-            <span style={{ fontSize: '11px', color: '#5b6b6c', backgroundColor: '#e1e7e7', padding: '4px 12px', borderRadius: '12px', fontWeight: 600 }}>
-              Today, 12 Oct 2023
-            </span>
-          </div>
-
           {activeConv.messages.map((msg) => {
-            const isPeer = msg.sender === 'peer';
+            const isSelf = msg.sender === 'self';
             return (
-              <div 
-                key={msg.id} 
-                style={{ 
-                  display: 'flex', 
-                  gap: '10px', 
-                  justifyContent: isPeer ? 'flex-start' : 'flex-end',
-                  alignItems: 'flex-end'
-                }}
-              >
-                {isPeer && (
-                  <img 
-                    src={peerInfo.avatar} 
-                    alt={activeConv.name}
-                    style={{ width: '32px', height: '32px', borderRadius: '4px', objectFit: 'cover' }} 
-                  />
-                )}
-
-                <div style={{ maxWidth: '420px' }}>
-                  <div style={{ 
-                    backgroundColor: isPeer ? '#ffffff' : '#0e5c63', 
-                    color: isPeer ? '#1c2826' : '#ffffff', 
+              <div key={msg.id} style={{ alignSelf: isSelf ? 'flex-end' : 'flex-start', maxWidth: '70%' }}>
+                <div 
+                  style={{ 
                     padding: '12px 16px', 
-                    borderRadius: '8px', 
-                    fontSize: '13px', 
+                    borderRadius: isSelf ? '16px 16px 2px 16px' : '16px 16px 16px 2px', 
+                    backgroundColor: isSelf ? '#0e5c63' : '#f1f5f5', 
+                    color: isSelf ? '#ffffff' : '#1c2826',
+                    fontSize: '13px',
                     lineHeight: 1.5,
-                    border: isPeer ? '1px solid #e1e7e7' : 'none',
-                    boxShadow: 'var(--shadow-sm)'
-                  }}>
-                    {msg.text}
-                  </div>
-
-                  <div style={{ 
-                    fontSize: '10px', 
-                    color: '#88999b', 
-                    marginTop: '4px', 
-                    textAlign: isPeer ? 'left' : 'right',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: isPeer ? 'flex-start' : 'flex-end',
-                    gap: '4px'
-                  }}>
-                    {msg.time}
-                    {!isPeer && <CheckCheck size={12} color="#0e5c63" />}
-                  </div>
+                    boxShadow: '0 1px 3px rgba(0,0,0,0.05)'
+                  }}
+                >
+                  {msg.text}
                 </div>
-
-                {!isPeer && (
-                  <div style={{ 
-                    width: '32px', 
-                    height: '32px', 
-                    backgroundColor: '#0a474d', 
-                    color: '#ffffff', 
-                    borderRadius: '4px', 
-                    display: 'flex', 
-                    alignItems: 'center', 
-                    justifyContent: 'center',
-                    fontSize: '12px',
-                    fontWeight: 700
-                  }}>
-                    RS
-                  </div>
-                )}
+                <div style={{ fontSize: '10px', color: '#88999b', marginTop: '4px', textAlign: isSelf ? 'right' : 'left' }}>
+                  {msg.time} {isSelf && '• Read'}
+                </div>
               </div>
             );
           })}
         </div>
 
         {/* Input Bar */}
-        <div style={{ padding: '16px 20px', backgroundColor: '#ffffff', borderTop: '1px solid #e1e7e7' }}>
-          <form onSubmit={handleSendMessage} style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
-            <input 
-              type="text" 
-              placeholder="Type a secure message..."
-              value={inputMessage}
-              onChange={(e) => setInputMessage(e.target.value)}
-              style={{ 
-                flex: 1, 
-                padding: '12px 16px', 
-                border: '1px solid #e1e7e7', 
-                borderRadius: '6px', 
-                fontSize: '13px',
-                outline: 'none'
-              }}
-            />
-            <button 
-              type="submit" 
-              style={{ 
-                backgroundColor: '#0e5c63', 
-                color: '#ffffff', 
-                padding: '10px 20px', 
-                borderRadius: '6px', 
-                fontSize: '13px', 
-                fontWeight: 700,
-                display: 'flex',
-                alignItems: 'center',
-                gap: '6px'
-              }}
-            >
-              Send <Send size={14} />
-            </button>
-          </form>
+        <form onSubmit={handleSendMessage} style={{ padding: '16px 24px', borderTop: '1px solid #edf1f1', backgroundColor: '#ffffff', display: 'flex', gap: '12px', alignItems: 'center' }}>
+          <button 
+            type="button"
+            onClick={() => alert("Upload Case DICOM / ECG / PDF attached!")}
+            style={{ color: '#0e5c63', background: 'none', border: 'none', cursor: 'pointer', padding: '6px' }}
+            title="Attach Clinical Document or DICOM"
+          >
+            <Paperclip size={20} />
+          </button>
+          
+          <input 
+            type="text"
+            placeholder="Type a clinical response, diagnostic note, or inquiry..."
+            value={inputMessage}
+            onChange={(e) => setInputMessage(e.target.value)}
+            style={{
+              flex: 1,
+              padding: '12px 18px',
+              borderRadius: '24px',
+              border: '1px solid #c8d5d6',
+              fontSize: '13px',
+              outline: 'none'
+            }}
+          />
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '11px', color: '#88999b', marginTop: '8px', justifyContent: 'center' }}>
-            <Lock size={10} /> End-to-end encrypted medical communication
-          </div>
-        </div>
+          <button 
+            type="submit"
+            className="btn btn-primary"
+            style={{ padding: '10px 20px', borderRadius: '24px', fontSize: '13px', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '6px', cursor: 'pointer' }}
+          >
+            Send <Send size={14} />
+          </button>
+        </form>
       </div>
+
     </div>
   );
 }
