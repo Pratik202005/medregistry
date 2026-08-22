@@ -105,6 +105,127 @@ export const institutionalUpdates = [
   }
 ];
 
+export const medicalFeedPosts = [
+  {
+    id: 'post-1',
+    author: {
+      id: 'anjali-menon',
+      name: 'Dr. Anjali Menon',
+      verified: true,
+      title: 'Senior Consultant Physician • Internal Medicine',
+      institution: 'Apollo Hospitals, Mumbai',
+      avatar: 'https://images.unsplash.com/photo-1594824813566-78a933758f46?auto=format&fit=crop&q=80&w=400',
+    },
+    time: '2 hrs ago',
+    category: 'Clinical Cases',
+    content: 'Fascinating case in the outpatient clinic today. A 42-year-old male presented with atypical chest pain and unexplained syncopal episodes. High-resolution ECG showed prolonged QTc with subtle T-wave alternans.\n\nAlways remember: never dismiss syncope in young patients without a comprehensive cardiac workup! Attached the anonymized ECG strip below for discussion.',
+    tags: ['#Cardiology', '#ClinicalCase', '#ECG', '#InternalMedicine'],
+    image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=800',
+    likes: 42,
+    comments: [
+      {
+        id: 'c1',
+        author: 'Dr. Vikram Patel',
+        avatar: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=200',
+        text: 'Great catch, Dr. Anjali. Did you check serum electrolytes or family history of sudden cardiac death?',
+        time: '1 hr ago'
+      },
+      {
+        id: 'c2',
+        author: 'Dr. Anjali Menon',
+        avatar: 'https://images.unsplash.com/photo-1594824813566-78a933758f46?auto=format&fit=crop&q=80&w=400',
+        text: 'Yes! Hypokalemia was ruled out. We are currently performing genetic testing for Long QT Syndrome type 1.',
+        time: '45 mins ago'
+      }
+    ],
+    shares: 12,
+    bookmarked: false,
+    isLiked: false
+  },
+  {
+    id: 'post-2',
+    author: {
+      id: 'rohan-mehta',
+      name: 'Rohan Mehta',
+      verified: false,
+      title: '3rd Year MBBS Student',
+      institution: 'Grant Medical College & JJ Hospital, Mumbai',
+      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=300',
+    },
+    time: '5 hrs ago',
+    category: 'Student Corner',
+    content: 'Finished my 2-month Clinical Rotations in Emergency Medicine! 🩺 Group study session on Harrison\'s Principles of Internal Medicine scheduled for this weekend.\n\nSeniors and Residents: What are your top tips for tackling case presentations effectively during morning rounds?',
+    tags: ['#MedicalStudent', '#MBBS', '#EmergencyMedicine', '#MedEd'],
+    likes: 89,
+    comments: [
+      {
+        id: 'c3',
+        author: 'Dr. Sameer Desai',
+        avatar: 'https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&q=80&w=300',
+        text: 'Structure is key Rohan! Master SBAR (Situation, Background, Assessment, Recommendation) and always lead with vital signs.',
+        time: '3 hrs ago'
+      }
+    ],
+    shares: 8,
+    bookmarked: true,
+    isLiked: true
+  },
+  {
+    id: 'post-3',
+    author: {
+      id: 'vikram-singh',
+      name: 'Dr. Vikram Singh',
+      verified: true,
+      title: 'HOD, Neurology & Neuro-Research',
+      institution: 'AIIMS, New Delhi',
+      avatar: 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=300',
+    },
+    time: '1 day ago',
+    category: 'Research & Papers',
+    content: 'Thrilled to publish our multicenter trial results in the Indian Journal of Neurology! We investigated the efficacy of early thrombolysis protocols combined with neuroprotective agents in acute ischemic stroke.\n\nFull open-access paper is attached below.',
+    tags: ['#Neurology', '#StrokeResearch', '#AIIMS', '#MedicalResearch'],
+    attachment: {
+      name: 'AIIMS_Neuro_Thrombolysis_Trial_2024.pdf',
+      size: '2.8 MB PDF Document'
+    },
+    likes: 154,
+    comments: [],
+    shares: 45,
+    bookmarked: false,
+    isLiked: false
+  },
+  {
+    id: 'post-4',
+    author: {
+      id: 'priya-sharma',
+      name: 'Dr. Priya Sharma',
+      verified: true,
+      title: 'Senior Resident - General Surgery',
+      institution: 'KEM Hospital, Mumbai',
+      avatar: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=300',
+    },
+    time: '2 days ago',
+    category: 'Residency & CME',
+    content: 'Completed 100 successful laparoscopic cholecystectomies during my residency tenure! Huge thanks to our mentors and OT nursing staff at KEM Hospital for guidance and support.',
+    tags: ['#Surgery', '#ResidencyLife', '#KEMHospital', '#SurgicalTraining'],
+    image: 'https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&q=80&w=800',
+    likes: 230,
+    comments: [],
+    shares: 19,
+    bookmarked: false,
+    isLiked: true
+  }
+];
+
+export const trendingMedicalNews = [
+  { id: 'tn-1', title: 'NMC updates guidelines for National Exit Test (NExT) 2025', readers: '14,210 readers' },
+  { id: 'tn-2', title: 'AIIMS Delhi launches AI-driven Early Detection ECG Lab', readers: '9,840 readers' },
+  { id: 'tn-3', title: 'ICMR issues revised Antibiotic Stewardship Protocol for ICUs', readers: '7,320 readers' },
+  { id: 'tn-4', title: 'DNB & MD/MS seat matrix expanded across government colleges', readers: '18,500 readers' },
+  { id: 'tn-5', title: 'Cardiological Society of India Annual Summit registration open', readers: '4,150 readers' }
+];
+
+
 export const upcomingMeetings = [
   {
     id: 'm1',
